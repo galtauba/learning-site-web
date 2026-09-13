@@ -16,7 +16,15 @@ try {
   let sha256 = '';
   if (checksumAsset?.browser_download_url) {
     const checksumResponse = await fetch(checksumAsset.browser_download_url, { signal: AbortSignal.timeout(5000) });
-    if (checksumResponse.ok) sha256 = (await checksumResponse.text()).split(/\r?\n/).find((line) => line.includes(installer.name))?.trim().split(/\s+/)[0] || '';
+    if (checksumResponse.ok) {
+      const normalizeFilename = (value) => value.replace(/[^a-z0-9]+/gi, '.').replace(/^\.|\.$/g, '').toLowerCase();
+      const installerName = normalizeFilename(installer.name);
+      const checksumLine = (await checksumResponse.text()).split(/\r?\n/).find((line) => {
+        const filename = line.trim().replace(/^[a-f0-9]+\s+/i, '').split(/[\\/]/).at(-1);
+        return normalizeFilename(filename) === installerName;
+      });
+      sha256 = checksumLine?.trim().split(/\s+/)[0] || '';
+    }
   }
   release = { version: remote.tag_name?.replace(/^v/, '') || fallback.version, downloadUrl: installer.browser_download_url, releaseUrl: remote.html_url, notes: remote.body || 'See the release notes for details.', sha256, source: 'github' };
 } catch (error) { release = { ...fallback, source: 'fallback' }; console.warn(`Using release fallback: ${error.message}`); }
