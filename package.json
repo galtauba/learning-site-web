@@ -1,0 +1,19 @@
+{
+  "name": "learning-site-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "astro dev",
+    "prebuild": "node scripts/sync-content.mjs",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "node --check scripts/sync-content.mjs && node --check tests/content.test.mjs",
+    "pretypecheck": "node scripts/sync-content.mjs",
+    "typecheck": "astro check",
+    "test": "node --test tests/**/*.test.mjs"
+  },
+  "dependencies": { "@astrojs/sitemap": "^3.2.1", "astro": "^5.16.6" },
+  "devDependencies": { "@astrojs/check": "^0.9.4", "eslint": "^9.39.4", "typescript": "^5.9.3" }
+}

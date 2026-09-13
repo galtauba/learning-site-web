@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+const sections=[
+['Installation','Download the Windows installer from the Download page, run it, then open Learning Site Editor. Keep Git installed if you will connect or publish repositories.'],
+['Create a new site','Choose New site, select a folder, enter the project details, and let the editor create the initial structure. Make the first commit before sharing or deploying.'],
+['Connect an existing repository','Choose Connect repository to select a local repository or clone one. The editor reads the project before changing it, then presents its status and pages.'],
+['Edit pages','Use the page tree to create, rename, move, or remove pages. Save content in the editor and use preview to check hierarchy, links, and readability.'],
+['Media and images','Add image files through the media library. Use descriptive filenames and alt text so every visual has a useful purpose for learners and assistive technology.'],
+['Themes','Choose a compatible installed theme, then preview it with your content. Theme metadata identifies the supported Learning Site Engine range.'],
+['Languages','Set the site language and writing direction to match your audience. For Hebrew content, use right-to-left direction and inspect navigation and media captions in preview.'],
+['Preview','Preview creates a local static view of the current project. Use it before commits and before a publish, especially after moving pages or changing themes.'],
+['Git synchronization','Review the change list, commit a clear checkpoint, then push to the connected remote. Pull first when another contributor has recently changed the repository.'],
+['Publish to GitHub Pages','Build the static site, configure the repository Pages source or workflow to use the built output, then push. Confirm the published URL after the GitHub deployment completes.'],
+['Publish to Cloudflare Pages','In Cloudflare Pages, connect the repository and set Build command to <code>npm run build</code> and Build output directory to <code>dist</code>. Each push can then create a preview or production deployment.'],
+['Backups and recovery','A Git commit is a recovery point. Commit before large changes, push an off-device copy, and use history to inspect or restore a known good revision. Keep a periodic archive of the repository for an additional independent backup.']
+];
+---
+<Base title="Learning Site documentation"><section class="page-intro"><p class="eyebrow">Documentation</p><h1>Build a dependable publishing practice.</h1><p class="lede">Practical guidance for the full Learning Site workflow, from first install to recovery.</p></section><section class="docs-layout"><aside aria-label="Documentation sections">{sections.map(([title])=><a href={`#${title.toLowerCase().replaceAll(' ','-')}`}>{title}</a>)}</aside><div class="docs-content">{sections.map(([title,body])=><section id={title.toLowerCase().replaceAll(' ','-')}><h2>{title}</h2><p set:html={body}></p></section>)}<section id="legacy-upgrade"><h2>Upgrade a legacy Learning Site repository</h2><p>Follow the dedicated <a href="/migration/">migration guide</a>. The editor detects legacy structure, creates a Git recovery point, preserves user content, and asks you to preview before publishing.</p></section></div></section></Base>
