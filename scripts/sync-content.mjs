@@ -12,6 +12,12 @@ try {
   const remote = await response.json();
   const installer = remote.assets?.find((asset) => /\.exe$/i.test(asset.name) && !/blockmap/i.test(asset.name));
   if (!installer) throw new Error('No Windows installer asset found');
-  release = { version: remote.tag_name?.replace(/^v/, '') || fallback.version, downloadUrl: installer.browser_download_url, releaseUrl: remote.html_url, notes: remote.body || 'See the release notes for details.', source: 'github' };
+  const checksumAsset = remote.assets?.find((asset) => /^checksums\.txt$/i.test(asset.name));
+  let sha256 = '';
+  if (checksumAsset?.browser_download_url) {
+    const checksumResponse = await fetch(checksumAsset.browser_download_url, { signal: AbortSignal.timeout(5000) });
+    if (checksumResponse.ok) sha256 = (await checksumResponse.text()).split(/\r?\n/).find((line) => line.includes(installer.name))?.trim().split(/\s+/)[0] || '';
+  }
+  release = { version: remote.tag_name?.replace(/^v/, '') || fallback.version, downloadUrl: installer.browser_download_url, releaseUrl: remote.html_url, notes: remote.body || 'See the release notes for details.', sha256, source: 'github' };
 } catch (error) { release = { ...fallback, source: 'fallback' }; console.warn(`Using release fallback: ${error.message}`); }
 await writeFile(resolve(data, 'release.json'), `${JSON.stringify(release, null, 2)}\n`);

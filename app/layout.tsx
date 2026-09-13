@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Starter Project",
-  description: "A clean starting point for building your site.",
+  title: "Learning Site — desktop editor for learning projects",
+  description: "Create, manage, update, and publish static learning sites from one desktop application.",
   other: {
     "codex-preview": "development",
   },

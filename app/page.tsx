@@ -1,106 +1,21 @@
-const sidebarWidths = [74, 58, 82, 66, 71, 54];
-const articleWidths = [100, 97, 94, 98, 86];
+const releaseUrl="https://github.com/galtauba/learning-site-editor/releases/latest";
 
-export default function Home() {
-  return (
-    <main className="fixed inset-0 overflow-hidden bg-[#fbfaf8] text-zinc-900">
-      <header
-        aria-hidden="true"
-        className="grid h-[76px] grid-cols-[1fr_auto_1fr] items-center border-b border-stone-200 bg-white/95 px-6 sm:px-14"
-      >
-        <div className="flex items-center gap-3">
-          <span className="h-9 w-9 rounded-full bg-stone-100" />
-          <span className="h-3.5 w-28 rounded-full bg-stone-100" />
-        </div>
-        <span className="hidden h-9 w-[min(30vw,420px)] rounded-xl bg-stone-100 sm:block" />
-        <div className="flex items-center justify-end gap-3">
-          <span className="hidden h-9 w-9 rounded-full bg-stone-100 sm:block" />
-          <span className="h-9 w-24 rounded-xl bg-stone-100" />
-        </div>
-      </header>
+const steps=[
+  ["01","Connect","Clone an existing GitHub repository or create a new Learning Site project."],
+  ["02","Create","Write lessons, organize navigation, add media, and preview the site locally."],
+  ["03","Publish","Validate, build, commit, and push the deployable static site from one desktop app."],
+];
 
-      <div
-        aria-hidden="true"
-        className="grid h-[calc(100%-76px)] grid-cols-[180px_minmax(0,1fr)_260px] gap-10 px-6 pb-24 pt-10 opacity-55 max-lg:grid-cols-[150px_minmax(0,1fr)] max-sm:grid-cols-1 sm:px-14"
-      >
-        <aside className="hidden border-r border-stone-200 pr-7 sm:block">
-          <div className="mb-6 h-2.5 w-16 rounded-full bg-stone-200" />
-          <div className="space-y-4">
-            {sidebarWidths.map((width) => (
-              <div key={width} className="flex items-center gap-3">
-                <span className="h-4 w-4 rounded bg-stone-200" />
-                <span
-                  className="h-2.5 rounded-full bg-stone-200"
-                  style={{ width: `${width}%` }}
-                />
-              </div>
-            ))}
-          </div>
-          <div className="mb-6 mt-9 h-2.5 w-24 rounded-full bg-stone-200" />
-          <div className="space-y-4">
-            {sidebarWidths.slice(0, 3).map((width) => (
-              <span
-                key={width}
-                className="block h-2.5 rounded-full bg-stone-200"
-                style={{ width: `${width}%` }}
-              />
-            ))}
-          </div>
-        </aside>
+const capabilities=[
+  "One desktop workspace for projects, content, media, themes, and Git.",
+  "Safe project updates that preserve each user repository as origin.",
+  "Static sites with Hebrew and English, responsive navigation, and search.",
+  "Versioned themes, validation, local preview, and release-aware updates.",
+];
 
-        <article className="mx-auto flex w-full max-w-3xl flex-col gap-6">
-          <div className="space-y-3">
-            <div className="h-2.5 w-28 rounded-full bg-stone-200" />
-            <div className="h-7 w-4/5 rounded-lg bg-stone-200" />
-            <div className="h-7 w-3/5 rounded-lg bg-stone-200" />
-          </div>
-          <div className="min-h-[240px] flex-1 rounded-2xl bg-stone-200" />
-          <div className="flex items-center gap-3">
-            <span className="h-9 w-9 rounded-full bg-stone-200" />
-            <span className="h-2.5 w-28 rounded-full bg-stone-200" />
-          </div>
-          <div className="space-y-2">
-            {articleWidths.map((width) => (
-              <span
-                key={width}
-                className="block h-2.5 rounded-full bg-stone-200"
-                style={{ width: `${width}%` }}
-              />
-            ))}
-          </div>
-        </article>
-
-        <aside className="space-y-5 max-lg:hidden">
-          {[0, 1].map((card) => (
-            <div
-              key={card}
-              className="space-y-4 rounded-2xl border border-stone-200 bg-white/70 p-6"
-            >
-              <span className="block h-10 w-10 rounded-full bg-stone-200" />
-              <span className="block h-3 w-3/5 rounded-full bg-stone-200" />
-              <span className="block h-2.5 w-full rounded-full bg-stone-200" />
-              <span className="block h-2.5 w-4/5 rounded-full bg-stone-200" />
-              <span className="block h-8 w-24 rounded-lg bg-stone-200" />
-            </div>
-          ))}
-        </aside>
-      </div>
-
-      <output
-        aria-live="polite"
-        aria-atomic="true"
-        className="absolute left-1/2 top-[clamp(96px,13vh,122px)] w-[min(620px,calc(100%-40px))] -translate-x-1/2 rounded-[18px] border border-stone-200 bg-white/95 px-5 py-5 shadow-[0_18px_50px_rgb(24_24_27/9%)] backdrop-blur-sm"
-      >
-        <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.09em] text-stone-500">
-          Building your site
-        </p>
-        <h1 className="text-xl font-semibold tracking-tight">
-          Your site is taking shape
-        </h1>
-        <p className="mt-1 text-sm text-stone-500">
-          Your first version will appear here automatically when it’s ready.
-        </p>
-      </output>
-    </main>
-  );
-}
+export default function Home(){return <main className="min-h-screen bg-[#07111f] text-slate-100"><header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 lg:px-8"><a className="flex items-center gap-3 font-semibold tracking-tight" href="#top"><span className="grid h-10 w-10 place-items-center rounded-xl bg-cyan-400 font-mono text-lg text-slate-950">&lt;/&gt;</span><span>Learning Site</span></a><nav className="hidden items-center gap-7 text-sm text-slate-300 sm:flex"><a className="hover:text-cyan-300" href="#workflow">Workflow</a><a className="hover:text-cyan-300" href="#features">Features</a><a className="hover:text-cyan-300" href="#download">Download</a></nav><a className="rounded-lg border border-cyan-300/40 px-4 py-2 text-sm font-medium text-cyan-200 hover:bg-cyan-300/10" href={releaseUrl}>Get the editor</a></header>
+<section id="top" className="relative overflow-hidden border-b border-slate-800"><div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,rgba(34,211,238,.18),transparent_28rem),radial-gradient(circle_at_15%_80%,rgba(59,130,246,.18),transparent_30rem)]"/><div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-20 lg:grid-cols-[1.1fr_.9fr] lg:px-8 lg:py-28"><div><p className="mb-5 text-sm font-semibold uppercase tracking-[.2em] text-cyan-300">Learning Site Desktop</p><h1 className="max-w-3xl text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">Build and maintain learning sites without leaving your project.</h1><p className="mt-7 max-w-xl text-lg leading-8 text-slate-300">Learning Site combines a modern content editor, project manager, version-aware updates, and static publishing workflow in one Electron application.</p><div className="mt-9 flex flex-wrap gap-3"><a className="rounded-lg bg-cyan-300 px-5 py-3 font-semibold text-slate-950 hover:bg-cyan-200" href={releaseUrl}>Download for Windows</a><a className="rounded-lg border border-slate-600 px-5 py-3 font-medium text-slate-200 hover:border-slate-400" href="#workflow">See how it works</a></div><p className="mt-4 text-sm text-slate-400">Windows installer · GitHub Releases · Your repositories remain yours</p></div><div className="rounded-2xl border border-slate-700/80 bg-slate-950/70 p-5 shadow-2xl shadow-cyan-950/40"><div className="mb-5 flex items-center justify-between border-b border-slate-800 pb-4 text-sm"><span className="font-medium">Learning Site Editor</span><span className="text-emerald-300">● Project ready</span></div><div className="grid gap-4 sm:grid-cols-[.72fr_1.28fr]"><aside className="rounded-xl bg-slate-900 p-4 text-sm"><p className="mb-4 font-semibold text-slate-100">Projects</p><div className="space-y-2 text-slate-400"><p className="rounded-md bg-cyan-300/10 px-3 py-2 text-cyan-200">CyberLearn</p><p className="px-3 py-2">Math lessons</p><p className="px-3 py-2">New course</p></div></aside><article className="rounded-xl bg-slate-900 p-5"><p className="text-xs font-semibold uppercase tracking-[.16em] text-cyan-300">Lesson</p><h2 className="mt-3 text-2xl font-semibold">Introduction to secure systems</h2><div className="mt-5 space-y-3 text-sm leading-6 text-slate-400"><p>Organize pages, publish selected lessons, and keep a full Git history.</p><p className="rounded-md border border-slate-700 p-3 text-slate-300">✓ Validation passed<br/>✓ Static output ready</p></div></article></div></div></div></section>
+<section id="workflow" className="mx-auto max-w-6xl px-6 py-20 lg:px-8"><p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-300">A predictable workflow</p><h2 className="mt-4 max-w-2xl text-3xl font-semibold tracking-tight sm:text-4xl">From repository to a published learning experience.</h2><div className="mt-10 grid gap-4 md:grid-cols-3">{steps.map(([number,title,description])=><article key={number} className="rounded-xl border border-slate-800 bg-slate-900/55 p-6"><span className="font-mono text-sm text-cyan-300">{number}</span><h3 className="mt-8 text-xl font-semibold">{title}</h3><p className="mt-3 leading-7 text-slate-400">{description}</p></article>)}</div></section>
+<section id="features" className="border-y border-slate-800 bg-slate-900/45"><div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 lg:grid-cols-[.8fr_1.2fr] lg:px-8"><div><p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-300">Built for ownership</p><h2 className="mt-4 text-3xl font-semibold tracking-tight">Modern tools. Clear boundaries.</h2><p className="mt-5 leading-7 text-slate-400">The editor separates your repository from official product updates, so your lessons and customizations stay under your control.</p></div><ul className="grid gap-3 sm:grid-cols-2">{capabilities.map(capability=><li key={capability} className="rounded-lg border border-slate-800 bg-[#091522] p-5 leading-7 text-slate-300"><span className="mr-2 text-cyan-300">✓</span>{capability}</li>)}</ul></div></section>
+<section id="download" className="mx-auto max-w-6xl px-6 py-20 lg:px-8"><div className="rounded-2xl border border-cyan-300/25 bg-gradient-to-br from-cyan-300/15 to-blue-500/10 p-8 sm:p-12"><p className="text-sm font-semibold uppercase tracking-[.2em] text-cyan-200">Ready to start</p><h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Install the editor and connect your first project.</h2><p className="mt-4 max-w-2xl leading-7 text-slate-300">Download the latest installer from GitHub Releases. Each release includes version notes and integrity information.</p><a className="mt-8 inline-flex rounded-lg bg-cyan-300 px-5 py-3 font-semibold text-slate-950 hover:bg-cyan-200" href={releaseUrl}>Open latest release</a></div></section>
+<footer className="border-t border-slate-800 px-6 py-8 text-center text-sm text-slate-500">© 2026 Learning Site. Your course content stays in your repository.</footer></main>}
